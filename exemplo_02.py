@@ -1,7 +1,20 @@
-a = 2 
-b = 8
-c = 3 
-x1 = (-b + (b**2 - 4*a*c)**0.5) / (2*a)
-x2 = (-b - (b**2 - 4*a*c)**0.5) / (2*a)
-print("O primeiro zero da função quadrática é:", x1)
-print("O segundo zero da função quadrática é:", x2)
+a = 0
+b = 1
+c = 0
+if a == 1:
+    resultado_a = "Verdadeiro"
+else:
+    resultado_a = "Falso"
+
+if b == 1:
+    resultado_b = "Verdadeiro"
+else:
+    resultado_b = "Falso"
+
+if c == 1:
+    resultado_c = "Verdadeiro"
+else:
+    resultado_c = "Falso"
+    print("A:", a, "é", resultado_a)
+    print("B:", b, "é", resultado_b)
+    print("C:", c, "é", resultado_c)
