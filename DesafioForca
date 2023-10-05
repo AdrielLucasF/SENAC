@@ -1,0 +1,96 @@
+import random
+
+# Variável para rastrear a pontuação do jogador
+pontuacao = 0
+
+def exibir_instrucoes():
+    print("Bem-vindo ao Jogo da Forca!")
+    print("Você deve adivinhar a palavra misteriosa escolhida da categoria selecionada.")
+    print("Você pode errar até um número máximo de vezes especificado.")
+    print("Boa sorte!")
+
+def escolher_palavra_misteriosa(categoria):
+    categorias = {
+        'frutas': ["abacaxi", "banana", "morango", "maçã", "pera"],
+        'animais': ["cachorro", "gato", "elefante", "girafa", "tigre"],
+        'cidades': ["paris", "londres", "nova iorque", "roma", "tóquio"],
+    }
+
+    if categoria in categorias:
+        palavras = categorias[categoria]
+        palavra_misteriosa = random.choice(palavras)
+        return palavra_misteriosa
+    else:
+        print("Categoria inválida. Escolha entre 'frutas', 'animais' ou 'cidades'")
+        return None
+
+def jogar_forca():
+    global pontuacao  # Usamos a variável global de pontuação
+
+    categoria = input("Escolha uma categoria ('frutas', 'animais' ou 'cidades'): ").lower()
+    palavra_misteriosa = escolher_palavra_misteriosa(categoria)
+
+    if palavra_misteriosa is None:
+        return
+
+    tamanho_palavra = len(palavra_misteriosa)
+    historico_de_letras = []
+    palavra_escondida = ['#' for _ in range(tamanho_palavra)]
+
+    print("-".join(palavra_escondida))
+
+    limite_de_erros = int(input("Quantidade de chutes errados permitidos durante a rodada: "))
+
+    erros = 0
+
+    while erros < limite_de_erros:
+        letra = input("Escreva 1 letra para a tentativa: ").lower()
+
+        if letra in historico_de_letras:
+            print("Essa letra já foi escolhida! Tente outra por favor.")
+        else:
+            historico_de_letras.append(letra)
+
+        verificacao = False
+
+        for i in range(tamanho_palavra):
+            if palavra_misteriosa[i] == letra:
+                palavra_escondida[i] = letra
+                verificacao = True
+
+        print("-".join(palavra_escondida))
+
+        palavra_completa = "".join(palavra_escondida)
+        if palavra_misteriosa == palavra_completa:
+            print("PARABÉNS! A PALAVRA ERA >>", palavra_misteriosa, "<<")
+            pontuacao += 1  # Incrementar a pontuação em 1 ponto quando o jogador ganha
+            break
+
+        if not verificacao:
+            erros += 1
+            print("A letra", letra, "não existe na palavra")
+
+    if erros == limite_de_erros:
+        print("Você excedeu o número máximo de erros. A palavra era:", palavra_misteriosa)
+        pontuacao -= 1  # Decrementar a pontuação em 1 ponto quando o jogador perde
+
+def contador_de_pontos():
+    global pontuacao
+    print(f"Sua pontuação atual é: {pontuacao}")
+
+def jogar_novamente():
+    while True:
+        jogar_novamente = input("Deseja jogar novamente? (s/n): ").strip().lower()
+        if jogar_novamente == 's':
+            jogar_forca()
+        elif jogar_novamente == 'n':
+            print("Obrigado por jogar! Sua pontuação final é:", pontuacao)
+            break
+        else:
+            print("Resposta inválida. Por favor, digite 's' para jogar novamente ou 'n' para sair.")
+
+if __name__ == "__main__":
+    exibir_instrucoes()
+    jogar_forca()
+    contador_de_pontos()
+    jogar_novamente()
