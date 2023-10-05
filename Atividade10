@@ -1,0 +1,13 @@
+import random
+
+def soma_sequencia_aleatoria(n):
+    if n == 0:
+        return 0
+    else:
+        numero_aleatorio = random.randint(1, 100) 
+        print("Número aleatório gerado:", numero_aleatorio)
+        return numero_aleatorio + soma_sequencia_aleatoria(n - 1)
+
+quantidade_numeros = 5  
+resultado = soma_sequencia_aleatoria(quantidade_numeros)
+print("A soma da sequência aleatória é:", resultado)
