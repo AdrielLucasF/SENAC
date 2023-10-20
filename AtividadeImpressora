@@ -1,0 +1,32 @@
+class DispositivoEletronico:
+    def __init__(self, nome):
+        self.nome = nome
+
+    def ligar(self):
+        pass
+
+    def desligar(self):
+        pass
+
+class Impressora(DispositivoEletronico):
+    def ligar(self):
+        print(f"{self.nome} está ligada e pronta para imprimir.")
+
+    def desligar(self):
+        print(f"{self.nome} foi desligada.")
+
+class SmartTV(DispositivoEletronico):
+    def ligar(self):
+        print(f"{self.nome} está ligada e transmitindo programas.")
+
+    def desligar(self):
+        print(f"{self.nome} foi desligada.")
+
+hp_deskjet = Impressora("HP DeskJet")
+samsung_smart_tv = SmartTV("Samsung Smart TV")
+
+hp_deskjet.ligar()
+hp_deskjet.desligar()
+
+samsung_smart_tv.ligar()
+samsung_smart_tv.desligar()
